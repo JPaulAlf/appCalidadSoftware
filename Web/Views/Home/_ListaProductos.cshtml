@@ -1,0 +1,83 @@
+﻿@model LNegocio.Articulo
+
+
+@if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos) == null)
+{
+    <tr class="table-warning">
+        <td colspan="7"><div class="text-center">La lista regreso como NULL</div> </td>
+    </tr>
+}
+else
+   if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() < 0)
+{
+    <tr class="table-warning">
+        <td colspan="7"><div class="text-center">(Count menor 0) Algo raro pasa</div> </td>
+    </tr>
+}
+else
+  if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() == 0)
+{
+    <tr class="table-warning">
+        <td colspan="7"><div class="text-center">(Count igual 0)No hay productos disponibles</div> </td>
+    </tr>
+}
+else
+  if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() > 0)
+{
+    <tr class="table-warning">
+        <td colspan="7"><div class="text-center">Si hay productos pero no los muestra</div> </td>
+    </tr>
+}
+else
+{
+    foreach (var item in (IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos)
+    {
+        <tr>
+            <th scope="row">1</th>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td class="text-center">
+                ₡@Html.DisplayFor(modelItem => item.costo)
+            </td>
+            <td class="text-center">
+                #3
+            </td>
+            <td class="text-center">
+                ₡2325
+            </td>
+            <td class="text-center">
+                @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
+                    new { id = item.id },
+                    new AjaxOptions
+                         {
+                        UpdateTargetId = "modal-content",
+                        InsertionMode = InsertionMode.Replace,
+                        //OnComplete = "mostrarModal()"
+                    }, new { @class = "btn btn-success" })
+
+                <button type="button"
+                        class="btn btn-success">
+                    Agregar
+                </button>
+
+            </td>
+            <td class="text-center">
+                @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
+                     new { id = item.id },
+                     new AjaxOptions
+                          {
+                         UpdateTargetId = "modal-content",
+                         InsertionMode = InsertionMode.Replace,
+                         //OnComplete = "mostrarModal()"
+                     }, new { @class = "btn btn-danger" })
+
+                <button type="button"
+                        class="btn btn-danger">
+                    Eliminar
+                </button>
+
+            </td>
+        </tr>
+    }
+}
