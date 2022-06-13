@@ -12,10 +12,14 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Linea
     {
         public int id { get; set; }
-        public string nombre { get; set; }
-        public string contrasenna { get; set; }
+        public Nullable<int> id_articulo { get; set; }
+        public Nullable<int> cantidad { get; set; }
+        public Nullable<int> id_Factura { get; set; }
+    
+        public virtual Articulo Articulo { get; set; }
+        public virtual Factura Factura { get; set; }
     }
 }
