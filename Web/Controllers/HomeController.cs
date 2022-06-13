@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
@@ -39,28 +40,53 @@ namespace Web.Controllers
 
         public ActionResult IndexVenta()
         {
+            //Limpia la instancia de SESSION de los pruductos, para inicar nueva venta
+            CrudProductos.Instancia.Items.Clear();
+
+            ServiceArticulos _ServiceArticulo = new ServiceArticulos();
+            Articulos oArticulos = null;
+
             IEnumerable<Infraestructure.Models.Articulo> lista = new List<Infraestructure.Models.Articulo>();
-
-            lista = new ArticuloRepository().GetArticulos();
-
-            IEnumerable<Articulo> articulos = new List<Articulo>();
-            if (lista != null || lista.Any())
+            try
             {
-                foreach (Infraestructure.Models.Articulo art in lista)
+                lista = new ArticuloRepository().GetArticulos();
+
+                IEnumerable<Articulo> articulos = new List<Articulo>();
+
+                if (lista != null || lista.Any())
                 {
-                    articulos.Append(new Articulo(art.nombre, (double)art.costo, 0));
+                    foreach (Infraestructure.Models.Articulo art in lista)
+                    {
+                        articulos.Append(new Articulo(art.nombre, (double)art.costo, 0));
+
+                        //Llena la lista de productos para la vista parcial
+                        ViewModelProductos oViewModelProductos = new ViewModelProductos();
+                        oViewModelProductos.ID = art.id;
+                        oViewModelProductos.nombre = art.nombre;
+                        oViewModelProductos.costo = art.costo + "";
+                        oViewModelProductos.cantidadUnidades = 0 + "";
+                        oViewModelProductos.precioUnidades = 0 + "";
+                        CrudProductos.Instancia.AgregarArticulo(oViewModelProductos);
+
+                    }
+                    //Factura.GetInstancia().Articulos = articulos;
+
+                    //Es la lista que obtiene la vista parcial para mostrar
+                    ViewBag.listArticulos = CrudProductos.Instancia.Items;
+                    return View("IndexVenta");
                 }
-                //Factura.GetInstancia().Articulos = articulos;
-
-                ViewBag.listArticulos = articulos;
+                return View("IndexVenta");
             }
-            else
+            catch (Exception ex)
             {
-                ViewBag.listArticulos = articulos;
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedores";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
-
-
-            return View("IndexVenta");
         }
 
 
@@ -99,8 +125,8 @@ namespace Web.Controllers
             CrudProductos.Instancia.RemoverArticulo(id);
             return PartialView("_ListaProductos", CrudProductos.Instancia);
         }
-        
-     
+
+
         //
         //
         //=================================================================================================================================================
