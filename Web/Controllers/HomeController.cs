@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
+using Web.ViewModel;
 
 namespace Web.Controllers
 {
@@ -86,23 +87,20 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult EliminarProducto(string nombre)
-        {
-            Factura.GetInstancia().EliminarArticulo(nombre);
-            //PRODUCTOS model = new ServiceProductos().GetProductoByID(id);
-            //return PartialView("_ModalProductos", model);
-            return View();
 
-        }
-        public ActionResult AgregarProducto(string nombre)
+        public ActionResult AgregarProducto(ViewModelProductos oViewModelProductos)
         {
-            Factura.GetInstancia().EliminarArticulo(nombre);
-            //PRODUCTOS model = new ServiceProductos().GetProductoByID(id);
-            //return PartialView("_ModalProductos", model);
-            return View();
-
+            CrudProductos.Instancia.AgregarArticulo(oViewModelProductos);
+            return PartialView("_ListaProductos", CrudProductos.Instancia);
         }
 
+        public ActionResult EliminarProducto(int id)
+        {
+            CrudProductos.Instancia.RemoverArticulo(id);
+            return PartialView("_ListaProductos", CrudProductos.Instancia);
+        }
+        
+     
         //
         //
         //=================================================================================================================================================
@@ -125,5 +123,32 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+
+
+
+
+
+
+
+        //public ActionResult EliminarProducto(string nombre)
+        //{
+        //    Factura.GetInstancia().EliminarArticulo(nombre);
+        //    //PRODUCTOS model = new ServiceProductos().GetProductoByID(id);
+        //    //return PartialView("_ModalProductos", model);
+        //    return View();
+
+        //}
+        //public ActionResult AgregarProducto(string nombre)
+        //{
+        //    Factura.GetInstancia().EliminarArticulo(nombre);
+        //    //PRODUCTOS model = new ServiceProductos().GetProductoByID(id);
+        //    //return PartialView("_ModalProductos", model);
+        //    return View();
+
+        //}
+
+
+
     }
 }

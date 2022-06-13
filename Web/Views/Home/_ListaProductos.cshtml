@@ -1,83 +1,85 @@
-﻿@model LNegocio.Articulo
+﻿@*@model Infraestructure.Models.Articulo*@
 
+@model Web.ViewModel.CrudProductos
 
-@if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos) == null)
-{
-    <tr class="table-warning">
-        <td colspan="7"><div class="text-center">La lista regreso como NULL</div> </td>
-    </tr>
-}
-else
-   if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() < 0)
-{
-    <tr class="table-warning">
-        <td colspan="7"><div class="text-center">(Count menor 0) Algo raro pasa</div> </td>
-    </tr>
-}
-else
-  if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() == 0)
-{
-    <tr class="table-warning">
-        <td colspan="7"><div class="text-center">(Count igual 0)No hay productos disponibles</div> </td>
-    </tr>
-}
-else
-  if (((IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos).Count() > 0)
-{
-    <tr class="table-warning">
-        <td colspan="7"><div class="text-center">Si hay productos pero no los muestra</div> </td>
-    </tr>
-}
-else
-{
-    foreach (var item in (IEnumerable<Infraestructure.Models.Articulo>)ViewBag.listaArticulos)
+<tbody id="productosCompra">
+
+    @if (Model.Items == null)
     {
-        <tr>
-            <th scope="row">1</th>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td class="text-center">
-                ₡@Html.DisplayFor(modelItem => item.costo)
-            </td>
-            <td class="text-center">
-                #3
-            </td>
-            <td class="text-center">
-                ₡2325
-            </td>
-            <td class="text-center">
-                @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
-                    new { id = item.id },
-                    new AjaxOptions
-                         {
-                        UpdateTargetId = "modal-content",
-                        InsertionMode = InsertionMode.Replace,
-                        //OnComplete = "mostrarModal()"
-                    }, new { @class = "btn btn-success" })
-
-                <button type="button"
-                        class="btn btn-success">
-                    Agregar
-                </button>
-
-            </td>
-            <td class="text-center">
-                @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
-                     new { id = item.id },
-                     new AjaxOptions
-                          {
-                         UpdateTargetId = "modal-content",
-                         InsertionMode = InsertionMode.Replace,
-                         //OnComplete = "mostrarModal()"
-                     }, new { @class = "btn btn-danger" })
-
-                <button type="button"
-                        class="btn btn-danger">
-                    Eliminar
-                </button>
-
-            </td>
+        <tr class="table-warning">
+            <td colspan="7"><div class="text-center">La lista regreso como NULL</div> </td>
         </tr>
     }
-}
+    else
+      if (Model.Items.Count() < 0)
+    {
+        <tr class="table-warning">
+            <td colspan="7"><div class="text-center">(Count menor 0) Algo raro pasa</div> </td>
+        </tr>
+    }
+    else
+    if (Model.Items.Count() == 0)
+    {
+        <tr class="table-warning">
+            <td colspan="7"><div class="text-center">(Count igual 0)No hay productos disponibles</div> </td>
+        </tr>
+    }
+    else
+    if (Model.Items.Count() > 0)
+    {
+        <tr class="table-warning">
+            <td colspan="7"><div class="text-center">Si hay productos pero no los muestra</div> </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model.Items)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td class="text-center">
+                    ₡@Html.DisplayFor(modelItem => item.costo)
+                </td>
+                <td class="text-center">
+                    #@Html.DisplayFor(modelItem => item.cantidadUnidades)
+                </td>
+                <td class="text-center">
+                    ₡@Html.DisplayFor(modelItem => item.precioUnidades)
+                </td>
+                <td class="text-center">
+                    @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
+                        new { id = item.IDProvisional },
+                        new AjaxOptions
+                             {
+                            UpdateTargetId = "productosCompra",
+                            InsertionMode = InsertionMode.Replace,
+                        }, new { @class = "btn btn-success" })
+
+                    @*<button type="button"
+                            class="btn btn-success">
+                        Agregar
+                    </button>*@
+
+                </td>
+                <td class="text-center">
+                    @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
+                         new { id = item.IDProvisional },
+                         new AjaxOptions
+                              {
+                             UpdateTargetId = "productosCompra",
+                             InsertionMode = InsertionMode.Replace,
+                         }, new { @class = "btn btn-danger" })
+
+                    @*<button type="button"
+                            class="btn btn-danger">
+                        Eliminar
+                    </button>*@
+
+                </td>
+            </tr>
+        }
+    }
+</tbody>

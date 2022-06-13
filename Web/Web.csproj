@@ -162,10 +162,8 @@
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
-    <Compile Include="ViewModel\CrudContactos.cs" />
-    <Compile Include="ViewModel\GestorBodega.cs" />
-    <Compile Include="ViewModel\ViewModelContactos.cs" />
-    <Compile Include="ViewModel\ViewModelMovimiento.cs" />
+    <Compile Include="ViewModel\CrudProductos.cs" />
+    <Compile Include="ViewModel\ViewModelProductos.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />

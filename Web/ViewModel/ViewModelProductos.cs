@@ -8,35 +8,40 @@ using System.Web;
 
 namespace Web.ViewModel
 {
-    public class ViewModelContactos
+    public class ViewModelProductos
     {
-     
-
         public int IDProvisional { get; set; }
+        
         public int ID { get; set; }
-        public Nullable<int> IDProv { get; set; }
+
         public Nullable<int> estado { get; set; }
 
         public string nombre { get; set; }
 
-        public string correo { get; set; }
+        public string costo { get; set; }
 
-        public string telefono { get; set; }
-        public virtual CONTACTO contacto { get; set; }
-        public virtual ViewModelContactos instancia()
+        public string cantidadUnidades { get; set; }
+
+        public string precioUnidades { get; set; }
+
+        public virtual Articulo articulo { get; set; }
+
+        public virtual ViewModelProductos instancia()
         {
             return this;
-
         }
-        public ViewModelContactos()
+        
+        public ViewModelProductos()
         {
            
         }
-        public ViewModelContactos(int ID)
+        
+        public ViewModelProductos(int ID)
         {
-            ServiceProveedores serviceProveedores = new ServiceProveedores();
+            ServiceArticulo serviceArticulo = new ServiceArticulo();
             this.ID = ID;
-            this.contacto = serviceProveedores.GetContactoByID(ID);
+            this.articulo = serviceProductos.GetArticulo(ID);
         }
+    
     }
 }
