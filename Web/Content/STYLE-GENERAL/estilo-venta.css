@@ -1,0 +1,112 @@
+﻿#body-venta {
+    height: 94.2%;
+    width: 100%;
+    /*background: url(/images/fondo-madera-copia.jpg) no-repeat center center fixed;*/
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    font-family: 'Rubik', sans-serif;
+}
+
+.container-modulo-venta {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: all 0.5s;
+    width: 70vw;
+    height: 80vh;
+    border-radius: 5px;
+    margin-top: 20px;
+    /* margin: 0 auto; */
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.color-verde {
+    background-color: #2a3310 !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff !important;
+    background-color: #2a3310 !important;
+}
+
+.nav-pills .nav-link {
+    background: 0 0;
+    border: 0;
+    border-radius: .25rem;
+}
+
+.nav {
+    flex-wrap: nowrap;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+    .nav-link:hover {
+        color: white;
+        font-weight: bold;
+    }
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: white;
+    --bs-table-active-color: white;
+    --bs-table-hover-color: white;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #fff !important;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+.container-info-tabs {
+    padding-top: 4%
+}
+
+
+.titulos {
+    color: cornsilk;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.boton-centrado {
+    cursor: pointer;
+    width: 35%;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.contenido-tercer-tab {
+    margin-left: 4%;
+}
+
+
+.text-total {
+    color: #dc3545 !important;
+    font-weight: bold !important;
+    font-size:x-large
+}
+
+.text-impuesto {
+    color: #2a3310;
+}
+
+.text-descuento {
+    color: #2a3310;
+}
+
+.text-subtotal {
+    color: #2a3310;
+}
