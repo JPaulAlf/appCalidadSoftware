@@ -1,4 +1,5 @@
-﻿using Infraestructure.Models;
+﻿using LNegocio;
+using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Security;
 using Web.ViewModel;
+using Usuario = Infraestructure.Models.Usuario;
+using Articulo = LNegocio.Articulo;
 
 namespace Web.Controllers
 {
@@ -98,7 +101,9 @@ namespace Web.Controllers
         {
             try
             {
-                //TODO Too tire for today
+                // el selectedProductos no se ocupa
+                GestorArticulos.getGestorArticulos().Factura.Efectivo = esEfectivo;
+                GestorArticulos.getGestorArticulos().Factura.Nombre = pCliente;
                 GestorArticulos.getGestorArticulos().Factura.GuardarFactura();
                 GestorArticulos.limpiar();
                 return View("IndexVenta");
@@ -138,8 +143,16 @@ namespace Web.Controllers
         {
             try
             {
-                //the login should do a redirectAction to (IndexVenta, Home)
-                return View("IndexLogin");
+                //the login should do a redirectAction to (IndexVenta, Home)\
+                LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
+                if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
+                {
+                    return View("IndexVenta");
+                }
+                else
+                {
+                    return View("IndexLogin");
+                }
 
             }
             catch (Exception ex)

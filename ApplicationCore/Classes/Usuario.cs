@@ -17,12 +17,18 @@ namespace LNegocio
         public Usuario(string alias, string contrasenha)
         {
             Alias = alias;
-            Contrasenha = Utils.ComputeSha256Hash(contrasenha);
+            Contrasenha = contrasenha; //Utils.ComputeSha256Hash(contrasenha);
         }
-
-        public bool Autorizacion()
+        public static Usuario getUsuario(string nombre, string contrasenha)
         {
-            return Contrasenha == ContrasenhaHash;
+            Infraestructure.Models.Usuario user = new Infraestructure.Repository.UsuarioRepository().GetUsuario(nombre, contrasenha);
+            if (user == null) return null;
+            return new Usuario(user.nombre, user.contrasenna);
+        }
+        public bool Autorizacion(string nombre, string pws)
+        {
+            //return Contrasenha == ContrasenhaHash;
+            return (nombre == Alias && pws == Contrasenha);
         }
     }
 }
