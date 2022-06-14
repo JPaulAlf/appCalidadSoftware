@@ -71,7 +71,7 @@ namespace Web.Controllers
             //Factura.GetInstancia().Articulos = articulos;
 
             //Es la lista que obtiene la vista parcial para mostrar
-            ViewBag.listArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
+            ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
                     
              return View("IndexVenta");
             }
