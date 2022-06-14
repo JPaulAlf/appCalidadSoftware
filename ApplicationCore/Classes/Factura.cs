@@ -68,6 +68,7 @@ namespace LNegocio
                 if (item.ID == id)
                 {
                     item.Cantidad++;
+                    item.TotalCosto();
                     return true;
                 }
             }
@@ -82,6 +83,7 @@ namespace LNegocio
                 {
                     if (item.Cantidad <= 0) return false;
                     item.Cantidad--;
+                    item.TotalCosto();
                     return true;
                 }
             }

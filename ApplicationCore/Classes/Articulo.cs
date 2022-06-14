@@ -14,6 +14,8 @@ namespace LNegocio
 
         public int Cantidad { get; set; }
 
+        public double Total { get; set; }
+
         public int ID { get; set; }
 
         public Articulo(string nombre, double costo, int cantidad, int id)
@@ -22,11 +24,13 @@ namespace LNegocio
             Costo = costo;
             Cantidad = cantidad;
             ID = id;
+            Total = TotalCosto();
         }
 
         public double TotalCosto()
         {
-            return Costo*Cantidad;
+            Total = Costo*Cantidad;
+            return Total;
         }
     }
 }
