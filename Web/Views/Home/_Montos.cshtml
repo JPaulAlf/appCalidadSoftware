@@ -1,0 +1,26 @@
+﻿@model LNegocio.Factura
+
+
+<div id="montosCompra">
+    <h5>
+        Subtotal: <b class="text-subtotal">
+            ₡@Html.DisplayFor(model => model.MontoSub)
+        </b>
+    </h5>
+    <h5>
+        Descuento: <b class="text-descuento">
+            -₡@Html.DisplayFor(model => model.MontoDesc)
+        </b>
+    </h5>
+    <h5>
+        Impuesto 13%: <b class="text-impuesto">
+            ₡@Html.DisplayFor(model => model.MontoImp)
+        </b>
+    </h5>
+    <h5>
+        Total: <b class="text-total">
+            ₡@Html.DisplayFor(model => model.MontoTot)
+        </b>
+    </h5>
+    <br>
+</div>

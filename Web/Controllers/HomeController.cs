@@ -111,7 +111,10 @@ namespace Web.Controllers
             return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
-
+        public ActionResult ActualizaPago()
+        {
+            return PartialView("_Montos", GestorArticulos.getGestorArticulos().Factura);
+        }
         //
         //
         //=================================================================================================================================================

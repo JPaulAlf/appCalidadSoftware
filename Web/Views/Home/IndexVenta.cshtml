@@ -19,6 +19,13 @@
 
             <button class="nav-link" data-bs-toggle="pill" href="#formalizar" type="button" role="tab" aria-selected="false" id="botonPago">
                 Pago
+                @*@Ajax.ActionLink("Pago", "ActualizaPago", "Home",
+                    new { },
+                    new AjaxOptions
+                            {
+                        UpdateTargetId = "productosCompra",
+                        InsertionMode = InsertionMode.Replace,
+                    }, new { })*@
             </button>
 
         </div>
@@ -80,7 +87,7 @@
                                             @Html.HiddenFor(modelItem => item.ID);
                                             <tr>
                                                 <th scope="row">
-                                                @Html.DisplayFor(modelItem => item.ID)
+                                                    @Html.DisplayFor(modelItem => item.ID)
                                                 </th>
                                                 <td class="text-center">
                                                     @Html.DisplayFor(modelItem => item.Nombre)
@@ -194,27 +201,29 @@
                             </div>
                             <br>
                             <br>
-                            <h5>
-                                Subtotal: <b class="text-subtotal">
-                                    ₡8025
-                                </b>
-                            </h5>
-                            <h5>
-                                Descuento: <b class="text-descuento">
-                                    -₡2000
-                                </b>
-                            </h5>
-                            <h5>
-                                Impuesto 13%: <b class="text-impuesto">
-                                    ₡7025
-                                </b>
-                            </h5>
-                            <h5>
-                                Total: <b class="text-total">
-                                    ₡6025
-                                </b>
-                            </h5>
-                            <br>
+                            <div id="montosCompra">
+                                <h5>
+                                    Subtotal: <b class="text-subtotal">
+                                        ₡@Html.DisplayFor(model => model.MontoSub)
+                                    </b>
+                                </h5>
+                                <h5>
+                                    Descuento: <b class="text-descuento">
+                                        -₡@Html.DisplayFor(model => model.MontoDesc)
+                                    </b>
+                                </h5>
+                                <h5>
+                                    Impuesto 13%: <b class="text-impuesto">
+                                        ₡@Html.DisplayFor(model => model.MontoImp)
+                                    </b>
+                                </h5>
+                                <h5>
+                                    Total: <b class="text-total">
+                                        ₡@Html.DisplayFor(model => model.MontoTot)
+                                    </b>
+                                </h5>
+                                <br>
+                            </div>
                         </div>
                         <div class="col text-center">
                             <button type="submit" class="btn btn-warning boton-centrado">Finalizar compra</button>

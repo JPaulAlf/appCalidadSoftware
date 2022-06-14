@@ -330,6 +330,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Shared\_LogIn.cshtml" />
     <Content Include="Views\Home\_ListaProductos.cshtml" />
+    <Content Include="Views\Home\_Montos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

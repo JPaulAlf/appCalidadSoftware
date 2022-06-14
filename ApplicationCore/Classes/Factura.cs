@@ -21,6 +21,10 @@ namespace LNegocio
 
         public Tarjeta Tarjeta { get; set; }
 
+        public double MontoSub { get; set; }
+        public double MontoDesc { get; set; }
+        public double MontoImp { get; set; }
+        public double MontoTot { get; set; }
 
 
         //singleton
@@ -89,9 +93,11 @@ namespace LNegocio
             }
             return false;
         }
+      
         public double MontoTotal()
         {
-            return MontoSubtotal()+MontoImpuesto()-MontoDescuento();
+           this.MontoTot= MontoSubtotal() + MontoImpuesto() - MontoDescuento();
+            return this.MontoTot;
         }
         public double MontoSubtotal()
         {
@@ -100,7 +106,8 @@ namespace LNegocio
             {
                 total += art.TotalCosto();
             }
-            return total;
+            this.MontoSub = total;
+            return this.MontoSub;
         }
         public double MontoDescuento()
         {
@@ -123,13 +130,15 @@ namespace LNegocio
                     descuento += monto * Desc;
                 }
             }
-            return descuento;
+            this.MontoDesc = descuento;
+            return this.MontoDesc;
         }
-
         public double MontoImpuesto()
         {
-            return (MontoSubtotal() - MontoDescuento()) * 0.13;
+            this.MontoImp= (MontoSubtotal() - MontoDescuento()) * 0.13;
+            return this.MontoImp;
         }
+
 
         public bool GuardarFactura()
         {
