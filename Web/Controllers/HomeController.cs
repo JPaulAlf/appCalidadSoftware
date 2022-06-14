@@ -46,16 +46,16 @@ namespace Web.Controllers
             //GestorArticulos.Instancia.Items.Clear();
 
             //ServiceArticulos _ServiceArticulo = new ServiceArticulos();
-           // Articulos oArticulos = null;
+            // Articulos oArticulos = null;
 
             IEnumerable<Infraestructure.Models.Articulo> lista = new List<Infraestructure.Models.Articulo>();
             try
             {
 
-            //Es la lista que obtiene la vista parcial para mostrar
-            ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
-                    
-             return View("IndexVenta");
+                //Es la lista que obtiene la vista parcial para mostrar
+                ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
+
+                return View("IndexVenta");
             }
             catch (Exception ex)
             {
@@ -127,9 +127,17 @@ namespace Web.Controllers
             {
                 //the login should do a redirectAction to (IndexVenta, Home)\
                 LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
-                if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
+
+                if (pUsuario.nombre != null && pUsuario.nombre != "" && pUsuario.contrasenna != null && pUsuario.contrasenna != "")
                 {
-                    return RedirectToAction("IndexVenta","Home");
+                    if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
+                    {
+                        return RedirectToAction("IndexVenta", "Home");
+                    }
+                    else
+                    {
+                        return View("IndexLogin");
+                    }
                 }
                 else
                 {
