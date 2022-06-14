@@ -25,7 +25,7 @@ namespace LNegocio
         public double MontoDesc { get; set; }
         public double MontoImp { get; set; }
         public double MontoTot { get; set; }
-        public double MontoEfectivo { get; set; }
+        public double? MontoEfectivo { get; set; }
 
 
         //singleton
@@ -143,9 +143,14 @@ namespace LNegocio
 
         public bool GuardarFactura()
         {
+            if(MontoEfectivo==null)
+            {
+                MontoEfectivo = 0;
+            }
+
             Infraestructure.Models.Factura factura = new Infraestructure.Models.Factura();
-            factura.descuento = Desc;
-            factura.efectivo = Efectivo ? 1 : 0;
+            factura.descuento = Desc;  
+            factura.efectivo = MontoEfectivo>0 ? 1 : 0;
             factura.monto_descuento = MontoDescuento();
             factura.monto_subtotal = MontoSubtotal();
             factura.iva = MontoImpuesto();
