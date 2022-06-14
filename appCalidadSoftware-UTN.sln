@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "Infraestructure\Infraestructure.csproj", "{6A45FEC0-8B74-4DDE-80CF-A6AD6C04246C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{28E081DC-5F4F-420B-B50D-4B6AD3D3C4D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LNegocio", "ApplicationCore\LNegocio.csproj", "{28E081DC-5F4F-420B-B50D-4B6AD3D3C4D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

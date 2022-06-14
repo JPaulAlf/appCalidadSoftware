@@ -162,7 +162,7 @@
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
-    <Compile Include="ViewModel\CrudProductos.cs" />
+    <Compile Include="ViewModel\GestorArticulos.cs" />
     <Compile Include="ViewModel\ViewModelProductos.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -339,9 +339,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj">
+    <ProjectReference Include="..\ApplicationCore\LNegocio.csproj">
       <Project>{28e081dc-5f4f-420b-b50d-4b6ad3d3c4d5}</Project>
-      <Name>ApplicationCore</Name>
+      <Name>LNegocio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj">
       <Project>{6a45fec0-8b74-4dde-80cf-a6ad6c04246c}</Project>

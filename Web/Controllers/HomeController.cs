@@ -1,5 +1,4 @@
-﻿using ApplicationCore.Services;
-using Infraestructure.Models;
+﻿using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -41,15 +40,15 @@ namespace Web.Controllers
         public ActionResult IndexVenta()
         {
             //Limpia la instancia de SESSION de los pruductos, para inicar nueva venta
-            CrudProductos.Instancia.Items.Clear();
+            //GestorArticulos.Instancia.Items.Clear();
 
-            ServiceArticulos _ServiceArticulo = new ServiceArticulos();
-            Articulos oArticulos = null;
+            //ServiceArticulos _ServiceArticulo = new ServiceArticulos();
+           // Articulos oArticulos = null;
 
             IEnumerable<Infraestructure.Models.Articulo> lista = new List<Infraestructure.Models.Articulo>();
             try
             {
-                lista = new ArticuloRepository().GetArticulos();
+                /*lista = new ArticuloRepository().GetArticulos();
 
                 IEnumerable<Articulo> articulos = new List<Articulo>();
 
@@ -66,16 +65,15 @@ namespace Web.Controllers
                         oViewModelProductos.costo = art.costo + "";
                         oViewModelProductos.cantidadUnidades = 0 + "";
                         oViewModelProductos.precioUnidades = 0 + "";
-                        CrudProductos.Instancia.AgregarArticulo(oViewModelProductos);
+                        GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
 
-                    }
-                    //Factura.GetInstancia().Articulos = articulos;
+                    }*/
+            //Factura.GetInstancia().Articulos = articulos;
 
-                    //Es la lista que obtiene la vista parcial para mostrar
-                    ViewBag.listArticulos = CrudProductos.Instancia.Items;
-                    return View("IndexVenta");
-                }
-                return View("IndexVenta");
+            //Es la lista que obtiene la vista parcial para mostrar
+            ViewBag.listArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
+                    
+             return View("IndexVenta");
             }
             catch (Exception ex)
             {
@@ -101,7 +99,8 @@ namespace Web.Controllers
             try
             {
                 //TODO Too tire for today
-
+                GestorArticulos.getGestorArticulos().Factura.GuardarFactura();
+                GestorArticulos.limpiar();
                 return View("IndexVenta");
 
             }
@@ -116,14 +115,16 @@ namespace Web.Controllers
 
         public ActionResult AgregarProducto(ViewModelProductos oViewModelProductos)
         {
-            CrudProductos.Instancia.AgregarArticulo(oViewModelProductos);
-            return PartialView("_ListaProductos", CrudProductos.Instancia);
+            //GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
+            //idealmente le deberia llegar solo el id
+            GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(oViewModelProductos.ID);
+            return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
         public ActionResult EliminarProducto(int id)
         {
-            CrudProductos.Instancia.RemoverArticulo(id);
-            return PartialView("_ListaProductos", CrudProductos.Instancia);
+            GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(id);
+            return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
 
