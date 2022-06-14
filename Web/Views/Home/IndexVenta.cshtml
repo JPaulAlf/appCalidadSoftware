@@ -79,7 +79,9 @@
                                             @Html.HiddenFor(modelItem => item);
                                             @Html.HiddenFor(modelItem => item.ID);
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">
+                                                @Html.DisplayFor(modelItem => item.ID)
+                                                </th>
                                                 <td class="text-center">
                                                     @Html.DisplayFor(modelItem => item.Nombre)
                                                 </td>
