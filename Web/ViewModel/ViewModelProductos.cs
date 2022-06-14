@@ -1,5 +1,4 @@
-﻿using ApplicationCore.Services;
-using Infraestructure.Models;
+﻿using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,9 +37,9 @@ namespace Web.ViewModel
         
         public ViewModelProductos(int ID)
         {
-            ServiceArticulo serviceArticulo = new ServiceArticulo();
-            this.ID = ID;
-            this.articulo = serviceProductos.GetArticulo(ID);
+            //ServiceArticulo serviceArticulo = new ServiceArticulo();
+            //this.ID = ID;
+            //this.articulo = serviceProductos.GetArticulo(ID);
         }
     
     }

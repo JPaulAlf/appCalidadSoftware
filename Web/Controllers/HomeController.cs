@@ -113,11 +113,11 @@ namespace Web.Controllers
             }
         }
 
-        public ActionResult AgregarProducto(ViewModelProductos oViewModelProductos)
+        public ActionResult AgregarProducto(int id)
         {
             //GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
             //idealmente le deberia llegar solo el id
-            GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(oViewModelProductos.ID);
+            GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(id);
             return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 

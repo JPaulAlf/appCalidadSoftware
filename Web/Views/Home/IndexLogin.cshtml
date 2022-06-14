@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Inicio Sesion";
+    Layout = "~/Views/Shared/_LogIn.cshtml";
+
 }
 
   @using (Html.BeginForm("Inicio_Sesion", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))

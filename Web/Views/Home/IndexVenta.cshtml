@@ -50,28 +50,28 @@
                                 </thead>
                                 <tbody id="productosCompra">
 
-                                    @if ((List<Web.ViewModel.ViewModelProductos>)ViewBag.listaArticulos == null)
+                                    @if ((List<LNegocio.Articulo>)ViewBag.listaArticulos == null)
                                     {
                                         <tr class="table-warning">
                                             <td colspan="7"><div class="text-center">La lista regreso como NULL</div> </td>
                                         </tr>
                                     }
                                     else
-                                      if (((List<Web.ViewModel.ViewModelProductos>)ViewBag.listaArticulos).Count() < 0)
+                                      if (((List<LNegocio.Articulo>)ViewBag.listaArticulos).Count() < 0)
                                     {
                                         <tr class="table-warning">
                                             <td colspan="7"><div class="text-center">(Count menor 0) Algo raro pasa</div> </td>
                                         </tr>
                                     }
                                     else
-                                    if (((List<Web.ViewModel.ViewModelProductos>)ViewBag.listaArticulos).Count() == 0)
+                                    if (((List<LNegocio.Articulo>)ViewBag.listaArticulos).Count() == 0)
                                     {
                                         <tr class="table-warning">
                                             <td colspan="7"><div class="text-center">(Count igual 0)No hay productos disponibles</div> </td>
                                         </tr>
                                     }
                                     else
-                                    if (((List<Web.ViewModel.ViewModelProductos>)ViewBag.listaArticulos).Count() > 0)
+                                    if (((List<LNegocio.Articulo>)ViewBag.listaArticulos).Count() > 0)
                                     {
                                         <tr class="table-warning">
                                             <td colspan="7"><div class="text-center">Si hay productos pero no los muestra</div> </td>
@@ -79,54 +79,52 @@
                                     }
                                     else
                                     {
-                                        foreach (var item in (List<Web.ViewModel.ViewModelProductos>)ViewBag.listaArticulos)
+                                        foreach (var item in (List<LNegocio.Articulo>)ViewBag.listaArticulos)
                                         {
                                             @Html.HiddenFor(modelItem => item);
                                             @Html.HiddenFor(modelItem => item.ID);
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td class="text-center">
-                                                    @Html.DisplayFor(modelItem => item.nombre)
+                                                    @Html.DisplayFor(modelItem => item.Nombre)
                                                 </td>
                                                 <td class="text-center">
-                                                    ₡@Html.DisplayFor(modelItem => item.costo)
+                                                    ₡@Html.DisplayFor(modelItem => item.Costo)
                                                 </td>
                                                 <td class="text-center">
-                                                    #@Html.DisplayFor(modelItem => item.cantidadUnidades)
+                                                    #@Html.DisplayFor(modelItem => item.Cantidad)
                                                 </td>
                                                 <td class="text-center">
-                                                    ₡@Html.DisplayFor(modelItem => item.precioUnidades)
+                                                    ₡@Html.DisplayFor(modelItem => item.TotalCosto())
                                                 </td>
                                                 <td class="text-center">
                                                     @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
-                                                        new { id = item.IDProvisional },
+                                                        new { id = item.ID },
                                                         new AjaxOptions
                                                              {
                                                             UpdateTargetId = "productosCompra",
                                                             InsertionMode = InsertionMode.Replace,
-                                                            //OnComplete = "mostrarModal()"
                                                         }, new { @class = "btn btn-success" })
 
                                                     @*<button type="button"
-                                                                class="btn btn-success">
-                                                            Agregar
-                                                        </button>*@
+                                                        class="btn btn-success">
+                                                    Agregar
+                                                </button>*@
 
                                                 </td>
                                                 <td class="text-center">
                                                     @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
-                                                         new { id = item.IDProvisional },
+                                                         new { id = item.ID },
                                                          new AjaxOptions
                                                               {
                                                              UpdateTargetId = "productosCompra",
                                                              InsertionMode = InsertionMode.Replace,
-                                                             //OnComplete = "mostrarModal()"
                                                          }, new { @class = "btn btn-danger" })
 
                                                     @*<button type="button"
-                                                                class="btn btn-danger">
-                                                            Eliminar
-                                                        </button>*@
+                                                        class="btn btn-danger">
+                                                    Eliminar
+                                                </button>*@
 
                                                 </td>
                                             </tr>

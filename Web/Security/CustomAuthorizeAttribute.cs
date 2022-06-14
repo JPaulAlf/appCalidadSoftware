@@ -26,15 +26,16 @@ namespace Web.Security
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             bool authorize = false;
-            var oUsuario = (USUARIO)httpContext.Session["User"];
+            var oUsuario = (Usuario)httpContext.Session["User"];
 
             if (oUsuario != null)
             {
-                foreach (var rol in allowedroles)
-                {
-                    if (rol == oUsuario.IDRol)
-                        return true;
-                }
+                //foreach (var rol in allowedroles)
+                //{
+                //    if (rol == oUsuario.IDRol)
+                //        return true;
+                //}
+                return true;
             }
             return authorize;
         }

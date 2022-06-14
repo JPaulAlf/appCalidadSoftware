@@ -12,7 +12,7 @@ namespace Web.Security
         public void OnAuthentication(AuthenticationContext filterContext)
         {
 
-            if ((USUARIO)filterContext.HttpContext.Session["User"] == null)
+            if ((Usuario)filterContext.HttpContext.Session["User"] == null)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
