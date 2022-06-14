@@ -19,13 +19,6 @@
 
             <button class="nav-link" data-bs-toggle="pill" href="#formalizar" type="button" role="tab" aria-selected="false" id="botonPago">
                 Pago
-                @*@Ajax.ActionLink("Pago", "ActualizaPago", "Home",
-                    new { },
-                    new AjaxOptions
-                            {
-                        UpdateTargetId = "productosCompra",
-                        InsertionMode = InsertionMode.Replace,
-                    }, new { })*@
             </button>
 
         </div>
@@ -40,7 +33,10 @@
                     <div class="container-info-tabs">
                         <H3 class="titulos">Productos seleccionados</H3>
                         <hr class="my-4">
-                        <H4>Total de compra: <b class="text-total">₡8025</b></H4>
+                        <div id="totalCarrito">
+                             <H4>Total de compra: <b class="text-total">  ₡0 @Html.DisplayFor(model => model.MontoTot)</b></H4>
+                        </div>
+                       
                         <br>
                         <div class="table-responsive">
                             <table class="table align-middle table-hover">
@@ -87,7 +83,7 @@
                                             @Html.HiddenFor(modelItem => item.ID);
                                             <tr>
                                                 <th scope="row">
-                                                    @Html.DisplayFor(modelItem => item.ID)
+                                                @Html.DisplayFor(modelItem => item.ID)
                                                 </th>
                                                 <td class="text-center">
                                                     @Html.DisplayFor(modelItem => item.Nombre)
@@ -102,33 +98,25 @@
                                                     ₡@Html.DisplayFor(modelItem => item.Total)
                                                 </td>
                                                 <td class="text-center">
-                                                    @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
+                                                    @*@Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
                                                         new { id = item.ID },
                                                         new AjaxOptions
                                                              {
                                                             UpdateTargetId = "productosCompra",
                                                             InsertionMode = InsertionMode.Replace,
-                                                        }, new { @class = "btn btn-success" })
+                                                        }, new { @class = "btn btn-success" })*@
 
-                                                    @*<button type="button"
+                                                    <button onclick="Agregar(@item.ID)" type="button"
                                                         class="btn btn-success">
                                                     Agregar
-                                                </button>*@
+                                                </button>
 
                                                 </td>
                                                 <td class="text-center">
-                                                    @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
-                                                         new { id = item.ID },
-                                                         new AjaxOptions
-                                                              {
-                                                             UpdateTargetId = "productosCompra",
-                                                             InsertionMode = InsertionMode.Replace,
-                                                         }, new { @class = "btn btn-danger" })
+                                                    <button onclick="Eliminar(@item.ID)" type="button"
+                                                            class="btn btn-danger">Eliminar</button>
 
-                                                    @*<button type="button"
-                                                        class="btn btn-danger">
-                                                    Eliminar
-                                                </button>*@
+                                                 
 
                                                 </td>
                                             </tr>
@@ -160,70 +148,76 @@
                                 <label>Favor seleccionar un metodo de pago:</label>
                                 <div class="form-group col-md-6">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="radio1"
-                                               id="radio1" value="EFECTIVO" checked>
+                                        <input class="form-check-input" type="radio" name="radioDineros"
+                                               id="radioEfectivo" value="EFECTIVO">
                                         <label class="form-check-label" for="radio1">EFECTIVO</label>
                                     </div>
+
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="radio1"
-                                               id="radio2" value="TARJETA">
+                                        <input class="form-check-input" type="radio" name="radioDineros"
+                                               id="radioTarjeta" value="TARJETA">
                                         <label class="form-check-label" for="radio2">TARJETA</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control", 
-                                       type = "number", id = "nombreCliente", placeholder = "Nombre de cliente" } })
-                                        @* <input type="number" class="form-control" id="radio2Tarjeta"
-                                            placeholder="Numero de tarjeta">*@
+                                        @Html.EditorFor(model => model.Tarjeta.numTarjeta, new
+                                        {
+                                       htmlAttributes = new
+                                            {
+                                                @class = "form-control",
+                                                type = "number",
+                                                id = "inputTarjeta",
+                                           placeholder = "Ingresar numero de tarjeta"
+                                            }
+                                        })
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.EditorFor(model => model.MontoEfectivo, new
+                                        {
+                                            htmlAttributes = new
+                                            {
+                                                @class = "form-control",
+                                                type = "number",
+                                                id = "inputEfectivo",
+                                                placeholder = "Ingresar monto con el cual va pagar"
+                                            }
+                                        })
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="form-row">
-                                <label>Descuento:</label>
-                                <div class="form-group col-md-6">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="radio"
-                                               id="radio3" value="option1" checked>
-                                        <label class="form-check-label" for="radio3">NO</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="radio"
-                                               id="radio4" value="option1">
-                                        <label class="form-check-label" for="radio4">SI</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control", 
-                                       type = "number", id = "nombreCliente", placeholder = "Nombre de cliente" } })
-                                        @* <input type="number" class="form-control" id="radio5Porcentaje"
-                                            placeholder="Porcentaje de descuento">*@
-                                    </div>
+                                
+                                <div id="descuento">
+
                                 </div>
+                              
                             </div>
                             <br>
                             <br>
-                            <div id="montosCompra">
-                                <h5>
-                                    Subtotal: <b class="text-subtotal">
-                                        ₡@Html.DisplayFor(model => model.MontoSub)
-                                    </b>
-                                </h5>
-                                <h5>
-                                    Descuento: <b class="text-descuento">
-                                        -₡@Html.DisplayFor(model => model.MontoDesc)
-                                    </b>
-                                </h5>
-                                <h5>
-                                    Impuesto 13%: <b class="text-impuesto">
-                                        ₡@Html.DisplayFor(model => model.MontoImp)
-                                    </b>
-                                </h5>
-                                <h5>
-                                    Total: <b class="text-total">
-                                        ₡@Html.DisplayFor(model => model.MontoTot)
-                                    </b>
-                                </h5>
-                                <br>
-                            </div>
+                           <div id="desglose">
+                               <h5>
+                                  Subtotal: <b class="text-subtotal">
+                                  ₡0 @Html.DisplayFor(model => model.MontoSub)
+                              </b>
+                          </h5>
+                        <h5>
+                            Descuento: <b class="text-descuento">
+                                -₡0 @Html.DisplayFor(model => model.MontoDesc)
+                            </b>
+                        </h5>
+                        <h5>
+                            Impuesto 13%: <b class="text-impuesto">
+                                ₡0 @Html.DisplayFor(model => model.MontoImp)
+                            </b>
+                        </h5>
+                        <h5>
+                            Total: <b class="text-total">
+                                ₡0 @Html.DisplayFor(model => model.MontoTot)
+                            </b>
+                        </h5>
+                        <br>
+                           </div>
+                            
                         </div>
                         <div class="col text-center">
                             <button type="submit" class="btn btn-warning boton-centrado">Finalizar compra</button>
@@ -243,8 +237,140 @@
 
 
 @section Scripts {
-
+     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
     <script type="text/javascript">
+
+
+        function AplicarDescuento() {
+
+            var descuento = document.getElementById('Descuento').value
+            console.log(descuento)
+             $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/AplicarDescuento",
+                data: {  "descuento": descuento },
+                success: function () {
+                   
+                   
+                    ActualizarDesglose();
+                    ActualizarTotalCarrito();
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+        }
+        function ActualizarDescuento() {
+
+
+
+
+
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/ActualizarDescuento",
+
+                success: function (data) {
+                    $("#descuento").html('');
+                    $("#descuento").html(data);
+
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+
+        }
+        function ActualizarTotalCarrito() {
+
+           
+            
+
+          
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/ActualizarTotalCarrito",
+               
+                success: function (data) {
+                    $("#totalCarrito").html('');
+                    $("#totalCarrito").html(data);
+                    
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+           
+        }
+        function ActualizarDesglose() {
+
+           
+            
+
+          
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/ActualizarDesglose",
+               
+                success: function (data) {
+                    $("#desglose").html('');
+                    $("#desglose").html(data);
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+           
+        }
+        function Agregar(id) {
+
+           
+            
+
+           
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/AgregarProducto",
+                data: {  "id": id },
+                success: function (data) {
+                   
+                    $("#productosCompra").html('');
+                    $("#productosCompra").html(data);
+                    ActualizarDesglose();
+                    ActualizarDescuento();
+                    ActualizarTotalCarrito();
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+           
+        }
+           function Eliminar(id) {
+
+           
+            
+
+         
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Home/EliminarProducto",
+                data: {  "id": id },
+                success: function (data) {
+                   
+                    $("#productosCompra").html('');
+                    $("#productosCompra").html(data);
+                    ActualizarDescuento();
+                    ActualizarDesglose();
+                     ActualizarTotalCarrito();
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+         
+        }
 
         document.getElementById("botonProducto").addEventListener("click", mostrar);
         document.getElementById("botonPago").addEventListener("click", ocultar);
@@ -262,9 +388,19 @@
             document.getElementById("productos").style.display = "none"
             document.getElementById("formalizar").style.display = "unset"
         }
+        document.getElementById("radioEfectivo").addEventListener("click", efectivo);
+        document.getElementById("radioTarjeta").addEventListener("click", tarjeta);
+        document.getElementById("inputTarjeta").style.display = "none"
+        document.getElementById("inputEfectivo").style.display = "none"
 
+        function efectivo() {
+            document.getElementById("inputTarjeta").style.display = "none"
+            document.getElementById("inputEfectivo").style.display = "unset"
+        }
+        function tarjeta() {
+            document.getElementById("inputTarjeta").style.display = "unset"
+            document.getElementById("inputEfectivo").style.display = "none"
+        }
     </script>
 
 }
-
-

@@ -25,6 +25,7 @@ namespace LNegocio
         public double MontoDesc { get; set; }
         public double MontoImp { get; set; }
         public double MontoTot { get; set; }
+        public double MontoEfectivo { get; set; }
 
 
         //singleton
@@ -113,7 +114,7 @@ namespace LNegocio
         {
 
             double descuento = 0;
-            if (Desc > 0)
+            if (Desc > 0 && Desc <= 0.10)
             {
                 double monto = MontoSubtotal();
                 int cont = 0;
@@ -122,7 +123,7 @@ namespace LNegocio
                     if (art.Cantidad > 0) cont++;
                 }
                 //2x1 gelatina
-                descuento = Articulos[2].Costo * Math.Floor(Convert.ToDouble(Articulos[2].Cantidad / 2));
+                //descuento = Articulos[2].Costo * Math.Floor(Convert.ToDouble(Articulos[2].Cantidad / 2));
                 //propiamente el descuento
                 if (cont >= 3 && monto >= 10000)
                 {

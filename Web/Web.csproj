@@ -331,6 +331,8 @@
     <Content Include="Views\Shared\_LogIn.cshtml" />
     <Content Include="Views\Home\_ListaProductos.cshtml" />
     <Content Include="Views\Home\_Montos.cshtml" />
+    <Content Include="Views\Home\_TotalCarrito.cshtml" />
+    <Content Include="Views\Home\_Descuento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

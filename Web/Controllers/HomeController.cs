@@ -46,16 +46,16 @@ namespace Web.Controllers
             //GestorArticulos.Instancia.Items.Clear();
 
             //ServiceArticulos _ServiceArticulo = new ServiceArticulos();
-            // Articulos oArticulos = null;
+           // Articulos oArticulos = null;
 
             IEnumerable<Infraestructure.Models.Articulo> lista = new List<Infraestructure.Models.Articulo>();
             try
             {
 
-                //Es la lista que obtiene la vista parcial para mostrar
-                ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
-
-                return View("IndexVenta");
+            //Es la lista que obtiene la vista parcial para mostrar
+            ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
+                    
+             return View("IndexVenta");
             }
             catch (Exception ex)
             {
@@ -96,12 +96,49 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        public ActionResult ActualizarDescuento()
+        {
+          
+           
+            double total = GestorArticulos.getGestorArticulos().Factura.MontoTotal();
+            GestorArticulos.guardar();
 
+
+            return PartialView("_Descuento", GestorArticulos.getGestorArticulos().Factura);
+        }
+        public ActionResult AplicarDescuento(int descuento)
+        {
+            double desc = 0;
+            desc = Convert.ToDouble(descuento);
+            GestorArticulos.getGestorArticulos().Factura.Desc = desc / 100;
+            double total = GestorArticulos.getGestorArticulos().Factura.MontoTotal();
+            GestorArticulos.guardar();
+
+            return PartialView("_Descuento", GestorArticulos.getGestorArticulos().Factura);
+
+        }
+        public ActionResult ActualizarTotalCarrito()
+        {
+            double total = GestorArticulos.getGestorArticulos().Factura.MontoTotal();
+            GestorArticulos.guardar();
+
+          
+            return PartialView("_TotalCarrito", GestorArticulos.getGestorArticulos().Factura);
+        }
+        public ActionResult ActualizarDesglose()
+        {
+            double total = GestorArticulos.getGestorArticulos().Factura.MontoTotal();
+            GestorArticulos.guardar();
+
+            
+            return PartialView("_Montos", GestorArticulos.getGestorArticulos().Factura);
+        }
         public ActionResult AgregarProducto(int id)
         {
             //GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
             //idealmente le deberia llegar solo el id
             GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(id);
+            GestorArticulos.guardar();
             return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
@@ -111,10 +148,7 @@ namespace Web.Controllers
             return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
-        public ActionResult ActualizaPago()
-        {
-            return PartialView("_Montos", GestorArticulos.getGestorArticulos().Factura);
-        }
+
         //
         //
         //=================================================================================================================================================
@@ -127,17 +161,9 @@ namespace Web.Controllers
             {
                 //the login should do a redirectAction to (IndexVenta, Home)\
                 LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
-
-                if (pUsuario.nombre != null && pUsuario.nombre != "" && pUsuario.contrasenna != null && pUsuario.contrasenna != "")
+                if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
                 {
-                    if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
-                    {
-                        return RedirectToAction("IndexVenta", "Home");
-                    }
-                    else
-                    {
-                        return View("IndexLogin");
-                    }
+                    return RedirectToAction("IndexVenta","Home");
                 }
                 else
                 {

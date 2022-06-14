@@ -1,0 +1,29 @@
+﻿@model LNegocio.Factura
+
+
+
+<label>Descuento:</label>
+<div class="form-group col-md-6">
+    @Html.EditorFor(model => model.Desc, new
+{
+    
+      
+            htmlAttributes = new
+            {
+                @class = "form-control",
+                type = "number",
+                id = "Descuento",
+                placeholder = "Descuento"
+            }
+        
+    
+})
+
+
+</div>
+<div>
+    <button onclick="AplicarDescuento()" type="button"
+            class="btn btn-success">
+      Aplicar Descuento
+    </button>
+</div>

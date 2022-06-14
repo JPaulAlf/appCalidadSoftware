@@ -2,7 +2,6 @@
 
 @model LNegocio.Factura 
 
-<tbody id="productosCompra">
 
     @if (Model.Articulos == null)
     {
@@ -45,36 +44,21 @@
                     ₡@Html.DisplayFor(modelItem => item.Total)
                 </td>
                 <td class="text-center">
-                    @Ajax.ActionLink("Agregar", "AgregarProducto", "Home",
-                        new { id = item.ID },
-                        new AjaxOptions
-                        {
-                            UpdateTargetId = "productosCompra",
-                            InsertionMode = InsertionMode.Replace,
-                        }, new { @class = "btn btn-success" })
+                    <button onclick="Agregar(@item.ID)" type="button"
+                         class="btn btn-success">Agregar</button>
 
-                    @*<button type="button"
-                            class="btn btn-success">
-                        Agregar
-                    </button>*@
+                   
 
                 </td>
                 <td class="text-center">
-                    @Ajax.ActionLink("Eliminar", "EliminarProducto", "Home",
-                         new { id = item.ID },
-                         new AjaxOptions
-                         {
-                             UpdateTargetId = "productosCompra",
-                             InsertionMode = InsertionMode.Replace,
-                         }, new { @class = "btn btn-danger" })
+                  
 
-                    @*<button type="button"
+                    <button onclick="Eliminar(@item.ID)" type="button"
                             class="btn btn-danger">
                         Eliminar
-                    </button>*@
+                    </button>
 
                 </td>
             </tr>
         }
     }
-</tbody>
