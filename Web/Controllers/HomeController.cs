@@ -51,27 +51,6 @@ namespace Web.Controllers
             IEnumerable<Infraestructure.Models.Articulo> lista = new List<Infraestructure.Models.Articulo>();
             try
             {
-                /*lista = new ArticuloRepository().GetArticulos();
-
-                IEnumerable<Articulo> articulos = new List<Articulo>();
-
-                if (lista != null || lista.Any())
-                {
-                    foreach (Infraestructure.Models.Articulo art in lista)
-                    {
-                        articulos.Append(new Articulo(art.nombre, (double)art.costo, 0));
-
-                        //Llena la lista de productos para la vista parcial
-                        ViewModelProductos oViewModelProductos = new ViewModelProductos();
-                        oViewModelProductos.ID = art.id;
-                        oViewModelProductos.nombre = art.nombre;
-                        oViewModelProductos.costo = art.costo + "";
-                        oViewModelProductos.cantidadUnidades = 0 + "";
-                        oViewModelProductos.precioUnidades = 0 + "";
-                        GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
-
-                    }*/
-            //Factura.GetInstancia().Articulos = articulos;
 
             //Es la lista que obtiene la vista parcial para mostrar
             ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
@@ -147,7 +126,7 @@ namespace Web.Controllers
                 LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
                 if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
                 {
-                    return View("IndexVenta");
+                    return RedirectToAction("IndexVenta","Home");
                 }
                 else
                 {
@@ -192,3 +171,36 @@ namespace Web.Controllers
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*lista = new ArticuloRepository().GetArticulos();
+
+ IEnumerable<Articulo> articulos = new List<Articulo>();
+
+ if (lista != null || lista.Any())
+ {
+     foreach (Infraestructure.Models.Articulo art in lista)
+     {
+         articulos.Append(new Articulo(art.nombre, (double)art.costo, 0));
+
+         //Llena la lista de productos para la vista parcial
+         ViewModelProductos oViewModelProductos = new ViewModelProductos();
+         oViewModelProductos.ID = art.id;
+         oViewModelProductos.nombre = art.nombre;
+         oViewModelProductos.costo = art.costo + "";
+         oViewModelProductos.cantidadUnidades = 0 + "";
+         oViewModelProductos.precioUnidades = 0 + "";
+         GestorArticulos.Instancia.AgregarArticulo(oViewModelProductos);
+
+     }*/
+//Factura.GetInstancia().Articulos = articulos;

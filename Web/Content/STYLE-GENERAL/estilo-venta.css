@@ -1,6 +1,6 @@
 ﻿#body-venta {
-    height: 94.2%;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     /*background: url(/images/fondo-madera-copia.jpg) no-repeat center center fixed;*/
     background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
     -webkit-background-size: cover;
@@ -60,9 +60,12 @@
 .table {
     --bs-table-bg: transparent;
     --bs-table-accent-bg: transparent;
-    --bs-table-striped-color: white;
-    --bs-table-active-color: white;
-    --bs-table-hover-color: white;
+    --bs-table-striped-color: #55595c;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: #55595c;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #FFF !important;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
     width: 100%;
     margin-bottom: 1rem;
     color: #fff !important;
