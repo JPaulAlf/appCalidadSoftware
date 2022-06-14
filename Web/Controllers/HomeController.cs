@@ -138,8 +138,16 @@ namespace Web.Controllers
         {
             try
             {
-                //the login should do a redirectAction to (IndexVenta, Home)
-                return View("IndexLogin");
+                //the login should do a redirectAction to (IndexVenta, Home)\
+                
+                if (pUsuario.nombre =="admin" && pUsuario.contrasenna=="123456")
+                {
+                    return View("IndexVenta");
+                }
+                else
+                {
+                    return View("IndexLogin");
+                }
 
             }
             catch (Exception ex)
