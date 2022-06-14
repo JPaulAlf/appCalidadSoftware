@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Classes\Articulo.cs" />
     <Compile Include="Classes\Factura.cs" />
-    <Compile Include="Classes\GestorUsuario.cs" />
     <Compile Include="Classes\Tarjeta.cs" />
     <Compile Include="Classes\Usuario.cs" />
     <Compile Include="Classes\Utils.cs" />
