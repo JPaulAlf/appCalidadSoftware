@@ -107,7 +107,7 @@ namespace Web.Controllers
 
         public ActionResult EliminarProducto(int id)
         {
-            GestorArticulos.getGestorArticulos().Factura.AgregarArticulos(id);
+            GestorArticulos.getGestorArticulos().Factura.EliminarArticulo(id);
             return PartialView("_ListaProductos", GestorArticulos.getGestorArticulos().Factura);
         }
 
