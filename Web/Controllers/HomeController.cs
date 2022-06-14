@@ -159,17 +159,26 @@ namespace Web.Controllers
         {
             try
             {
-                //the login should do a redirectAction to (IndexVenta, Home)\
-                LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
-                if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
+                if (pUsuario.nombre != null && pUsuario.nombre != "" && pUsuario.contrasenna != null && pUsuario.contrasenna != "")
                 {
-                    return RedirectToAction("IndexVenta","Home");
+
+
+                    //the login should do a redirectAction to (IndexVenta, Home)\
+                    LNegocio.Usuario usuario = LNegocio.Usuario.getUsuario(pUsuario.nombre, pUsuario.contrasenna);
+
+                    if (usuario.Autorizacion(pUsuario.nombre, pUsuario.contrasenna))
+                    {
+                        return RedirectToAction("IndexVenta", "Home");
+                    }
+                    else
+                    {
+                        return View("IndexLogin");
+                    }
                 }
                 else
                 {
                     return View("IndexLogin");
                 }
-
             }
             catch (Exception ex)
             {
