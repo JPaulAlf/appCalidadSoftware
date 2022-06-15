@@ -122,9 +122,10 @@ namespace LNegocio
                 foreach (Articulo art in Articulos)
                 {
                     if (art.Cantidad > 0) cont++;
+                    if (art.Nombre== "Gelatinas")descuento = art.Costo * Math.Floor(Convert.ToDouble(art.Cantidad / 2));
                 }
                 //2x1 gelatina
-                //descuento = Articulos[2].Costo * Math.Floor(Convert.ToDouble(Articulos[2].Cantidad / 2));
+                //
                 //propiamente el descuento
                 if (cont >= 3 && monto >= 10000)
                 {
