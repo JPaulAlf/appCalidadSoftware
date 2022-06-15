@@ -28,13 +28,22 @@
             @using (Html.BeginForm("Guardar_Compra", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
 
-                <!-- TAB 1 -->
-                <div class="col col-lg-12 tab-pane fade show active" id="productos" role="tabpanel">
+
+
+<!-- TAB 1 --><div class="col col-lg-12 tab-pane fade show active" id="productos" role="tabpanel">
                     <div class="container-info-tabs">
                         <H3 class="titulos">Productos seleccionados</H3>
                         <hr class="my-4">
                         <div id="totalCarrito">
-                             <H4>Total de compra: <b class="text-total">  ₡0 @Html.DisplayFor(model => model.MontoTot)</b></H4>
+                            @if (Model.MontoTot > 0)
+                            {
+                                <H4>Total de compra: <b class="text-total">  ₡ @Html.DisplayFor(model => model.MontoTot)</b></H4>
+                            }
+                            else
+                            {
+                                <H4>Total de compra: <b class="text-total">  ₡0 @Html.DisplayFor(model => model.MontoTot)</b></H4>
+                            }
+
                         </div>
                        
                         <br>
@@ -194,29 +203,62 @@
                             </div>
                             <br>
                             <br>
-                           <div id="desglose">
-                               <h5>
-                                  Subtotal: <b class="text-subtotal">
-                                  ₡0 @Html.DisplayFor(model => model.MontoSub)
-                              </b>
-                          </h5>
-                        <h5>
-                            Descuento: <b class="text-descuento">
-                                -₡0 @Html.DisplayFor(model => model.MontoDesc)
-                            </b>
-                        </h5>
-                        <h5>
-                            Impuesto 13%: <b class="text-impuesto">
-                                ₡0 @Html.DisplayFor(model => model.MontoImp)
-                            </b>
-                        </h5>
-                        <h5>
-                            Total: <b class="text-total">
-                                ₡0 @Html.DisplayFor(model => model.MontoTot)
-                            </b>
-                        </h5>
-                        <br>
-                           </div>
+                            <div id="desglose">
+                                @if (Model.MontoTot > 0)
+                                {
+
+                                    <h5>
+                                        Subtotal: <b class="text-subtotal">
+
+                                            ₡ @Html.DisplayFor(model => model.MontoSub)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Descuento: <b class="text-descuento">
+                                            -₡ @Html.DisplayFor(model => model.MontoDesc)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Impuesto 13%: <b class="text-impuesto">
+                                            ₡ @Html.DisplayFor(model => model.MontoImp)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Total: <b class="text-total">
+                                            ₡ @Html.DisplayFor(model => model.MontoTot)
+                                        </b>
+                                    </h5>
+
+
+                                    <br>
+                                }
+                                else
+                                {
+
+                                    <h5>
+                                        Subtotal: <b class="text-subtotal">
+
+                                            ₡0 @Html.DisplayFor(model => model.MontoSub)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Descuento: <b class="text-descuento">
+                                            -₡0 @Html.DisplayFor(model => model.MontoDesc)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Impuesto 13%: <b class="text-impuesto">
+                                            ₡0 @Html.DisplayFor(model => model.MontoImp)
+                                        </b>
+                                    </h5>
+                                    <h5>
+                                        Total: <b class="text-total">
+                                            ₡0 @Html.DisplayFor(model => model.MontoTot)
+                                        </b>
+                                    </h5>
+                                    <br>
+                                }
+                            </div>
                             
                         </div>
                         <div class="col text-center">
