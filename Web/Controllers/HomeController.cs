@@ -54,8 +54,9 @@ namespace Web.Controllers
 
             //Es la lista que obtiene la vista parcial para mostrar
             ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
-                    
-             return View("IndexVenta");
+                GestorArticulos.getGestorArticulos().Factura.MontoTot = 0;
+                  
+             return View("IndexVenta", new LNegocio.Factura());
             }
             catch (Exception ex)
             {
@@ -100,6 +101,7 @@ namespace Web.Controllers
                     {
                         ViewBag.NotificationMessage = SweetAlertHelper.Mensaje("Cambio por compra",
                            "Su efectivo no es suficiente", SweetAlertMessageType.error);
+                        ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
                         return View("IndexVenta", fGestor);
                     }
                 }
@@ -114,8 +116,8 @@ namespace Web.Controllers
                 ViewBag.NotificationMessage = SweetAlertHelper.Mensaje("EXITO", "Transaccion finalizada correctamente", SweetAlertMessageType.success);
                 GestorArticulos.limpiar();
                 ViewBag.listaArticulos = GestorArticulos.getGestorArticulos().Factura.Articulos;
-
-                return View("IndexVenta");
+                GestorArticulos.getGestorArticulos().Factura.MontoTot = 0;
+                return View("IndexVenta", new LNegocio.Factura());
 
             }
             catch (Exception ex)

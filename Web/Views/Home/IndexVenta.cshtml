@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Venta Producto";
     Layout = "~/Views/Shared/_LayoutMaster.cshtml";
-
+    
 }
 
 <div class="container-modulo-venta py-2">
@@ -41,7 +41,7 @@
                             }
                             else
                             {
-                                <H4>Total de compra: <b class="text-total">  ₡0 @Html.DisplayFor(model => model.MontoTot)</b></H4>
+                                <H4>Total de compra: <b class="text-total">  ₡0 </b></H4>
                             }
 
                         </div>
@@ -238,22 +238,22 @@
                                     <h5>
                                         Subtotal: <b class="text-subtotal">
 
-                                            ₡0 @Html.DisplayFor(model => model.MontoSub)
+                                            ₡0 
                                         </b>
                                     </h5>
                                     <h5>
                                         Descuento: <b class="text-descuento">
-                                            -₡0 @Html.DisplayFor(model => model.MontoDesc)
+                                            -₡0 
                                         </b>
                                     </h5>
                                     <h5>
                                         Impuesto 13%: <b class="text-impuesto">
-                                            ₡0 @Html.DisplayFor(model => model.MontoImp)
+                                            ₡0 
                                         </b>
                                     </h5>
                                     <h5>
                                         Total: <b class="text-total">
-                                            ₡0 @Html.DisplayFor(model => model.MontoTot)
+                                            ₡0 
                                         </b>
                                     </h5>
                                     <br>

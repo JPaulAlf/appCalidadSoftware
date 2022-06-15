@@ -34,6 +34,7 @@ namespace LNegocio
 
         public Factura()
         {
+            this.MontoTot = 0;
             /*Articulos = new Articulo[0];
 
             foreach (string art in articulos)
