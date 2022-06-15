@@ -75,6 +75,7 @@ namespace LNegocio
                 {
                     item.Cantidad++;
                     item.TotalCosto();
+                    MontoTotal();
                     return true;
                 }
             }
@@ -90,6 +91,7 @@ namespace LNegocio
                     if (item.Cantidad <= 0) return false;
                     item.Cantidad--;
                     item.TotalCosto();
+                    MontoTotal();
                     return true;
                 }
             }
@@ -115,17 +117,16 @@ namespace LNegocio
         {
 
             double descuento = 0;
+            int cont = 0;
+            foreach (Articulo art in Articulos)
+            {
+                if (art.Cantidad > 0) cont++;
+                //2x1 gelatina
+                if (art.Nombre == "Gelatinas") descuento = art.Costo * Math.Floor(Convert.ToDouble(art.Cantidad / 2));
+            }
             if (Desc > 0 && Desc <= 0.10)
             {
                 double monto = MontoSubtotal();
-                int cont = 0;
-                foreach (Articulo art in Articulos)
-                {
-                    if (art.Cantidad > 0) cont++;
-                    if (art.Nombre== "Gelatinas")descuento = art.Costo * Math.Floor(Convert.ToDouble(art.Cantidad / 2));
-                }
-                //2x1 gelatina
-                //
                 //propiamente el descuento
                 if (cont >= 3 && monto >= 10000)
                 {
