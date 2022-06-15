@@ -91,9 +91,9 @@ namespace Web.Controllers
                     if(fGestor.MontoTot <= pFactura.MontoEfectivo)
                     {
                         //Vuelto
-                        double vuelto = (double)(fGestor.MontoTot - pFactura.MontoEfectivo);
-                        ViewBag.NotificationMessage = SweetAlertHelper.Mensaje("Cambio por compra",
-                            "Su cambio es:" + vuelto + "Gracias!",
+                        double vuelto = (double)(pFactura.MontoEfectivo- fGestor.MontoTot);
+                        ViewBag.NotificationMessage2 = SweetAlertHelper.Mensaje("Cambio por compra",
+                            "Su cambio es: ₡" + vuelto + " ",
                             SweetAlertMessageType.success);
                     }
                     else

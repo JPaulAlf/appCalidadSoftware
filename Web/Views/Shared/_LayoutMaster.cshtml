@@ -45,5 +45,11 @@
             @Html.Raw(@ViewBag.NotificationMessage);
         </script>
     }
+    @if (ViewBag.NotificationMessage2 != null)
+    {
+        <script>
+            @Html.Raw(@ViewBag.NotificationMessage2);
+        </script>
+    }
 </body>
 </html>
