@@ -30,7 +30,7 @@ namespace TestLNegocio.Classes
             Usuario usu = new Usuario(nombre, pass);
 
 
-            bool esperado = true;
+            bool esperado = false;
 
             Assert.AreEqual(esperado, usu.Autorizacion("sde4w", "1234"));
 
