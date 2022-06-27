@@ -103,7 +103,7 @@ namespace TestLNegocio.Classes
             fact.MontoEfectivo = 4000;
             fact.MontoTotal();
 
-            Assert.AreEqual(true, fact.MontoSub == fact.MontoEfectivo);
+            Assert.AreEqual(false, fact.MontoSub == fact.MontoEfectivo);
         }
 
 
