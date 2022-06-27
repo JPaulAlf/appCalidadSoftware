@@ -77,6 +77,35 @@ namespace TestLNegocio.Classes
             Assert.AreEqual(false, fact.MontoDesc > 0);
         }
 
+        [TestMethod]
+        public void VerificacionPromo1()
+        {
+            Factura fact = new Factura();
+            fact.AgregarArticulos(4);
+            fact.AgregarArticulos(4);
+            fact.AgregarArticulos(4);
+            fact.AgregarArticulos(4);
+
+            fact.MontoEfectivo = 4000;
+            fact.MontoTotal();
+
+            Assert.AreEqual(true, fact.MontoSub == fact.MontoEfectivo);
+        }
+
+        [TestMethod]
+        public void VerificacionPromo2()
+        {
+            Factura fact = new Factura();
+            fact.AgregarArticulos(4);
+            fact.AgregarArticulos(4);
+            fact.AgregarArticulos(4);
+
+            fact.MontoEfectivo = 4000;
+            fact.MontoTotal();
+
+            Assert.AreEqual(true, fact.MontoSub == fact.MontoEfectivo);
+        }
+
 
     }
 }
