@@ -150,6 +150,11 @@ namespace LNegocio
             {
                 MontoEfectivo = 0;
             }
+            else
+            {
+               if (MontoEfectivo==0) return false;
+            }
+            
 
             Infraestructure.Models.Factura factura = new Infraestructure.Models.Factura();
             factura.descuento = Desc;  

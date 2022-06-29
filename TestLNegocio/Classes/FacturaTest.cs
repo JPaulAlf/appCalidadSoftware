@@ -89,7 +89,8 @@ namespace TestLNegocio.Classes
             fact.MontoEfectivo = 4000;
             fact.MontoTotal();
 
-            Assert.AreEqual(true, fact.MontoSub == fact.MontoEfectivo);
+            Assert.AreEqual(true, (fact.MontoSub-fact.MontoDesc) == fact.MontoEfectivo);
+
         }
 
         [TestMethod]
@@ -100,10 +101,10 @@ namespace TestLNegocio.Classes
             fact.AgregarArticulos(4);
             fact.AgregarArticulos(4);
 
-            fact.MontoEfectivo = 4000;
+            fact.MontoEfectivo = 6000;
             fact.MontoTotal();
 
-            Assert.AreEqual(false, fact.MontoSub == fact.MontoEfectivo);
+            Assert.AreEqual(false, (fact.MontoSub - fact.MontoDesc) == fact.MontoEfectivo);
         }
 
 
